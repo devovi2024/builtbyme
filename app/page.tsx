@@ -1,12 +1,15 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import FeaturedProducts from "@/components/landing-page/featured-products";
+import HeroSection from "@/components/landing-page/hero-section";
+
 
 export default function Home() {
   return (
     <div>
-      Hello Next.js
-      <Button variant="link" size="lg">Subscribe and Updates</Button>
+      <HeroSection/>
+      <FeaturedProducts/>
+
     </div>
   );
 }
