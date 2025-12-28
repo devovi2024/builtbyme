@@ -1,0 +1,222 @@
+.header {
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  @media (min-width: 640px) {
+    padding: 0 24px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 32px;
+  }
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 900;
+  color: #1f2937;
+
+  .logoIcon {
+    width: 28px;
+    height: 28px;
+    color: #fbbf24;
+  }
+
+  .pink {
+    color: #ec4899;
+  }
+
+  .indigo {
+    color: #6366f1;
+  }
+}
+
+// Desktop Navigation
+.desktopNav {
+  display: none; // মোবাইলে লুকানো
+  align-items: center;
+  gap: 24px;
+
+  @media (min-width: 640px) {
+    display: flex;
+  }
+}
+
+.iconBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #f3f4f6;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &.home {
+    color: #6366f1;
+  }
+
+  &.explore {
+    color: #ec4899;
+  }
+}
+
+.submitBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(to right, #ec4899, #fbbf24);
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(251, 191, 36, 0.4);
+  }
+
+  .sparkle {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.profileBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: #eef2ff;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #e0e7ff;
+  }
+
+  .userIcon {
+    width: 24px;
+    height: 24px;
+    color: #6366f1;
+  }
+}
+
+// Mobile Menu Button
+.mobileToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #f3f4f6;
+  }
+
+  @media (min-width: 640px) {
+    display: none;
+  }
+
+  .menuIcon {
+    width: 24px;
+    height: 24px;
+    color: #374151;
+  }
+}
+
+// Mobile Menu
+.mobileMenu {
+  display: block;
+  padding: 16px 0;
+  border-top: 1px solid #e5e7eb;
+  background: white;
+
+  @media (min-width: 640px) {
+    display: none;
+  }
+}
+
+.mobileMenuInner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 16px;
+}
+
+.mobileLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+  font-size: 16px;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #f9fafb;
+  }
+
+  .mobileIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  &.homeIcon {
+    color: #6366f1;
+  }
+
+  &.exploreIcon {
+    color: #ec4899;
+  }
+
+  &.submitIcon {
+    color: #fbbf24;
+  }
+
+  &.profileIcon {
+    color: #6366f1;
+  }
+}

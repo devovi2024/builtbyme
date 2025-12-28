@@ -1,58 +1,103 @@
 "use client";
 
-import { CompassIcon, HomeIcon, SparkleIcon, UserIcon } from "lucide-react";
+import { Compass, Home, Menu, Sparkle, User, X } from "lucide-react";
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { useState } from "react";
+import styles from "../common/Header.module.scss";
 
 export default function Header() {
-  const [isLogedIn, setIsLogedIn] = useState(true);
-
-  const Logo = () => {
-    return (
-      <Link href="/" className="flex items-center space-x-2">
-        <SparkleIcon className="w-6 h-6 text-yellow-500" />
-        <span className="font-bold text-lg">
-          Built <span className="text-pink-500">By</span> <span>Me</span>
-        </span>
-      </Link>
-    );
-  };
+  const [isLoggedIn] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-md">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-        <Logo />
-
-=        <nav className="flex items-center space-x-4">
-          <Link href="/" className="p-2 rounded hover:bg-gray-100 transition">
-            <HomeIcon className="w-5 h-5 text-gray-700" />
+    <header className={styles.header}>
+      <div className={styles.container}>
+        <div className={styles.inner}>
+          <Link href="/" className={styles.logo}>
+            <Sparkle className={styles.logoIcon + " animate-bounce"} />
+            <span>
+              Built <span className={styles.pink}>By</span>{" "}
+              <span className={styles.indigo}>Me</span>
+            </span>
           </Link>
 
-          <Link href="/explore" className="p-2 rounded hover:bg-gray-100 transition">
-            <CompassIcon className="w-5 h-5 text-gray-700" />
-          </Link>
+          <nav className={styles.desktopNav}>
+            <Link href="/" className={styles.iconBtn}>
+              <Home className={`${styles.icon} ${styles.home}`} />
+            </Link>
+            <Link href="/explore" className={styles.iconBtn}>
+              <Compass className={`${styles.icon} ${styles.explore}`} />
+            </Link>
 
-          {isLogedIn ? (
-            <>
-              <Button asChild className="ml-2">
-              <Link href="/submit-product" className="flex items-center gap-1">
-                <SparkleIcon className="w-4 h-4" /> Submit Product
+            {isLoggedIn ? (
+              <>
+                <Link href="/submit-product" className={styles.submitBtn}>
+                  <Sparkle className={styles.sparkle} />
+                  Submit Product
+                </Link>
+                <button className={styles.profileBtn}>
+                  <User className={styles.userIcon} />
+                </button>
+              </>
+            ) : (
+              <>
+                <button className={styles.submitBtn}>Sign In</button>
+                <button className={styles.submitBtn}>Sign Up</button>
+              </>
+            )}
+          </nav>
+
+          <button
+            className={styles.mobileToggle}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <X className={styles.menuIcon} />
+            ) : (
+              <Menu className={styles.menuIcon} />
+            )}
+          </button>
+        </div>
+
+        {isMobileMenuOpen && (
+          <div className={styles.mobileMenu}>
+            <div className={styles.mobileMenuInner}>
+              <Link
+                href="/"
+                className={styles.mobileLink}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <Home className={`${styles.mobileIcon} ${styles.homeIcon}`} />
+                <span>Home</span>
               </Link>
-            </Button>
-            {/* profile  */}
-            <Button className="ml-2">
-              <UserIcon className="w-5 h-5" />
-            </Button>
-            </>
+              <Link
+                href="/explore"
+                className={styles.mobileLink}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <Compass className={`${styles.mobileIcon} ${styles.exploreIcon}`} />
+                <span>Explore</span>
+              </Link>
 
-          ) : (
-            <div className="flex gap-2 ml-2">
-              <Button>Sign In</Button>
-              <Button>Sign Up</Button>
+              {isLoggedIn && (
+                <>
+                  <Link
+                    href="/submit-product"
+                    className={styles.mobileLink}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Sparkle className={`${styles.mobileIcon} ${styles.submitIcon}`} />
+                    <span>Submit Product</span>
+                  </Link>
+                  <div className={styles.mobileLink}>
+                    <User className={`${styles.mobileIcon} ${styles.profileIcon}`} />
+                    <span>Profile</span>
+                  </div>
+                </>
+              )}
             </div>
-          )}
-        </nav>
+          </div>
+        )}
       </div>
     </header>
   );
