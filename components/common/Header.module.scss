@@ -54,7 +54,7 @@
 
 // Desktop Navigation
 .desktopNav {
-  display: none; // মোবাইলে লুকানো
+  display: none;
   align-items: center;
   gap: 24px;
 
@@ -115,25 +115,17 @@
   }
 }
 
-.profileBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  background: #eef2ff;
+// Profile Buttons
+.userIconLarge {
+  width: 40px;  // Bigger desktop profile icon
+  height: 40px;
   border-radius: 50%;
-  transition: background 0.3s ease;
+}
 
-  &:hover {
-    background: #e0e7ff;
-  }
-
-  .userIcon {
-    width: 24px;
-    height: 24px;
-    color: #6366f1;
-  }
+.profileIconLarge {
+  width: 36px; // Slightly smaller for mobile
+  height: 36px;
+  border-radius: 50%;
 }
 
 // Mobile Menu Button

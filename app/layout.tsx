@@ -3,7 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/common/header";
 import Footer from "@/components/common/footer";
-
+import { ClerkProvider } from "@clerk/nextjs"; 
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
@@ -19,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.className} bg-gray-50 text-gray-900`}>
-     <Header/>
-        <main>{children}</main>
-        <Footer/>
+        <ClerkProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </ClerkProvider>
       </body>
     </html>
   );

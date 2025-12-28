@@ -1,12 +1,13 @@
 "use client";
 
-import { Compass, Home, Menu, Sparkle, User, X } from "lucide-react";
+import { Compass, Home, Menu, Sparkle, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import styles from "../common/Header.module.scss";
+import styles from "./Header.module.scss";
+import { useUser, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 
 export default function Header() {
-  const [isLoggedIn] = useState(false);
+  const { isSignedIn } = useUser();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -14,7 +15,7 @@ export default function Header() {
       <div className={styles.container}>
         <div className={styles.inner}>
           <Link href="/" className={styles.logo}>
-            <Sparkle className={styles.logoIcon + " animate-bounce"} />
+            <Sparkle className={`${styles.logoIcon} animate-bounce`} />
             <span>
               Built <span className={styles.pink}>By</span>{" "}
               <span className={styles.indigo}>Me</span>
@@ -29,20 +30,29 @@ export default function Header() {
               <Compass className={`${styles.icon} ${styles.explore}`} />
             </Link>
 
-            {isLoggedIn ? (
+            {isSignedIn ? (
               <>
                 <Link href="/submit-product" className={styles.submitBtn}>
                   <Sparkle className={styles.sparkle} />
                   Submit Product
                 </Link>
-                <button className={styles.profileBtn}>
-                  <User className={styles.userIcon} />
-                </button>
+                <UserButton
+                  afterSignOutUrl="/"
+                  appearance={{
+                    elements: {
+                      userButtonAvatarBox: styles.userIconLarge,
+                    },
+                  }}
+                />
               </>
             ) : (
               <>
-                <button className={styles.submitBtn}>Sign In</button>
-                <button className={styles.submitBtn}>Sign Up</button>
+                <SignInButton>
+                  <button className={styles.submitBtn}>Sign In</button>
+                </SignInButton>
+                <SignUpButton>
+                  <button className={styles.submitBtn}>Sign Up</button>
+                </SignUpButton>
               </>
             )}
           </nav>
@@ -79,7 +89,7 @@ export default function Header() {
                 <span>Explore</span>
               </Link>
 
-              {isLoggedIn && (
+              {isSignedIn ? (
                 <>
                   <Link
                     href="/submit-product"
@@ -89,10 +99,33 @@ export default function Header() {
                     <Sparkle className={`${styles.mobileIcon} ${styles.submitIcon}`} />
                     <span>Submit Product</span>
                   </Link>
-                  <div className={styles.mobileLink}>
-                    <User className={`${styles.mobileIcon} ${styles.profileIcon}`} />
-                    <span>Profile</span>
-                  </div>
+                  <UserButton
+                    afterSignOutUrl="/"
+                    appearance={{
+                      elements: {
+                        userButtonAvatarBox: `${styles.mobileIcon} ${styles.profileIconLarge}`,
+                      },
+                    }}
+                  />
+                </>
+              ) : (
+                <>
+                  <SignInButton>
+                    <button
+                      className={styles.mobileLink}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Sign In
+                    </button>
+                  </SignInButton>
+                  <SignUpButton>
+                    <button
+                      className={styles.mobileLink}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Sign Up
+                    </button>
+                  </SignUpButton>
                 </>
               )}
             </div>
