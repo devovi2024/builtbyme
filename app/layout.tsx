@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/common/header";
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
@@ -17,9 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.className} bg-gray-50 text-gray-900`}>
-        <header className="w-full py-4 px-6 shadow-md bg-white sticky top-0 z-50">
-          <h1 className="text-xl font-bold">Built By Me</h1>
-        </header>
+     <Header/>
         <main>{children}</main>
       </body>
     </html>

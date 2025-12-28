@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpIcon, Star } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 import ProductCard, { Product } from "../products/product-card";
 import SectionHeader from "../common/section-header";
 import { Button } from "../ui/button";
@@ -27,23 +27,36 @@ const featuredProducts: Product[] = [
 
 export default function FeaturedProducts() {
   return (
-    <section className="py-16 px-6 md:px-16">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+    <section className="py-20 px-6 md:px-16">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-10">
         <SectionHeader
           title="Featured Today"
           icon={Star}
           description="Top picks from our community this week"
         />
-        <Button variant="outline" className="mt-4 md:mt-0">
+
+        <Button
+          variant="outline"
+          asChild
+          className="group rounded-full border-border/60 hover:border-primary transition-colors"
+        >
           <Link href="/products" className="flex items-center gap-2">
-            View All <ArrowUpIcon className="w-4 h-4" />
+            View All
+            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </Button>
       </div>
 
+      {/* Products */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {featuredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <div
+            key={product.id}
+            className="transition-transform duration-200 hover:-translate-y-1"
+          >
+            <ProductCard product={product} />
+          </div>
         ))}
       </div>
     </section>

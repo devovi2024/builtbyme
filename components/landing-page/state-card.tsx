@@ -1,19 +1,38 @@
-"use client";
-
+import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
 
-interface StateCardProps {
-  icon: LucideIcon;
-  value: string;
-  label: string;
-}
-
-export default function StateCard({ icon: Icon, value, label }: StateCardProps) {
+export default function StateCard(
+  {
+    icon: Icon,
+    value,
+    label,
+    hasBorder,
+  }: {
+    icon: LucideIcon;
+    value: string;
+    label: string;
+    hasBorder?: boolean;
+  }
+) {
   return (
-    <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md w-40">
-      <Icon className="w-8 h-8 text-pink-500 mb-2" />
-      <span className="text-2xl font-bold text-gray-900">{value}</span>
-      <span className="text-gray-600">{label}</span>
+    <div
+      className={cn(
+        "group space-y-2 px-4 py-4 transition-all duration-300 ease-in-out",
+        "hover:bg-muted/40 rounded-xl shadow-sm hover:shadow-md cursor-pointer",
+        hasBorder && "border-x border-border/50"
+      )}
+    >
+      <div className="flex items-center justify-center gap-3">
+        <Icon className="size-6 text-primary/80 transition-transform duration-300 group-hover:scale-110" />
+
+        <p className="text-3xl sm:text-4xl font-extrabold tracking-tight transition-colors group-hover:text-primary">
+          {value}
+        </p>
+      </div>
+
+      <p className="text-sm text-muted-foreground transition-colors group-hover:text-foreground/80">
+        {label}
+      </p>
     </div>
   );
 }
