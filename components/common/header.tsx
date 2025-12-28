@@ -1,12 +1,12 @@
 "use client";
 
-import { CompassIcon, HomeIcon, SparkleIcon } from "lucide-react";
+import { CompassIcon, HomeIcon, SparkleIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { useState } from "react";
 
 export default function Header() {
-  const [isLogedIn, setIsLogedIn] = useState(false);
+  const [isLogedIn, setIsLogedIn] = useState(true);
 
   const Logo = () => {
     return (
@@ -34,11 +34,18 @@ export default function Header() {
           </Link>
 
           {isLogedIn ? (
-            <Button asChild className="ml-2">
+            <>
+              <Button asChild className="ml-2">
               <Link href="/submit-product" className="flex items-center gap-1">
                 <SparkleIcon className="w-4 h-4" /> Submit Product
               </Link>
             </Button>
+            {/* profile  */}
+            <Button className="ml-2">
+              <UserIcon className="w-5 h-5" />
+            </Button>
+            </>
+
           ) : (
             <div className="flex gap-2 ml-2">
               <Button>Sign In</Button>
